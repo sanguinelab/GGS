@@ -46,16 +46,16 @@ def GGS(data, Kmax, lamb, features = [], verbose = False):
 
         #Check if our algorithm is finished
         if(newVal == 0):
-            print "We are done adding breakpoints!"
-            print breaks
+            print("We are done adding breakpoints!")
+            print(breaks)
             return breaks, plotPoints
 
         #Add new breakpoint
         breaks.append(newInd)
         breaks.sort()
         if (verbose == True):
-            print "Breakpoint occurs at sample number: ", newInd, ", LL = ",  newVal
-            print len(breaks) - 2, breaks
+            print(f"Breakpoint occurs at sample number: {newInd} LL = {newVal}")
+            print(len(breaks) - 2, breaks)
 
         #Adjust current locations of the breakpoints
         breaks = adjustBreaks(data,breaks,[newInd],lamb,verbose)[:]
@@ -161,12 +161,6 @@ def GGSMeanCov(data, breakpoints, lamb, features = [], verbose = False):
     return mean_covs
 
 
-
-
-
-
-
-
 #HELPER FUNCTIONS
 def calculateLikelihood(data, breaks,lamb):
     ll = 0
@@ -247,7 +241,7 @@ def adjustBreaks(data, breakpoints, newInd, lamb = 0, verbose = False, maxShuffl
                     del thisPass[bp[i]]
                     thisPass[ind+bp[i-1]] = 1
                     if (verbose == True):
-                        print "Moving", bp[i], "to", ind+bp[i-1], "length = ", tempData.shape[0], ind
+                        print(f"Moving {bp[i]} to {ind+bp[i-1]} length = {tempData.shape[0]} {ind}")
                     bp[i] = ind + bp[i-1]
                     switchAny = True
         if (switchAny == False):
